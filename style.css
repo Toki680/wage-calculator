@@ -1,1 +1,132 @@
+@charset "utf-8";
 
+* {
+  padding: 4px;
+}
+
+body {
+  max-width: 600px;
+  margin: auto;
+}
+
+.week_holder {
+  display: flex;
+  justify-content: space-between;
+}
+
+.day_holder {
+  text-align: center;
+}
+
+input {
+  border: 1px solid #dcdfe6;
+  border-radius: 4px;
+  margin: 4px;
+  text-align: center;
+  font-size: 16px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.day_holder input {
+  width: 2.5em;
+}
+
+.wage_holder input {
+  width: 4em;
+}
+
+.dates_holder {
+  margin: 20px 0 20px 0;
+}
+
+button {
+  background: #ffffff;
+  border: 1px solid #dcdfe6;
+  border-radius: 4px;
+  cursor: pointer;
+  box-sizing: border-box;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+}
+
+button:hover{
+  background: #fcfcfc;
+}
+
+button:active{
+  scale: .95;
+}
+
+.info_icon {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.info_icon i{
+  background-color: black;
+  color: white;
+  width: 20px;
+  border-radius: 50%;
+  padding: 1px 7px;
+  font-size: 14px;
+}
+
+.tooltip {
+  visibility: hidden;
+  width: 310px;
+  background-color: #555555;
+  color: #ffffff;
+  text-align: center;
+  font-size:14px;
+  border-radius: 5px;
+  padding: 5px;
+  position: absolute;
+  top: 50%;
+  left: 105%; 
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 100%; 
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent #555555 transparent transparent;
+}
+
+.info_icon:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+.title{
+  display: flex;
+  align-items: center;
+}
+
+#warning {
+  text-align: center;
+  margin: 0;
+  font-size: 16px;
+  color: red;
+  padding: 0;
+  opacity: 0;
+}
+
+#detail {
+  margin-top: -15px;
+  margin-left: 1.5cm;
+}
