@@ -49,7 +49,7 @@ function calc() {
     var end = displayEnd.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
   }
 
-  document.getElementById('pay_period').innerHTML = 'Pay Period // 工资周期: ' + begin + ' - ' + end;
+  document.getElementById('pay_period').innerHTML = `Pay Period // 工资周期: ${begin} - ${end}`;
 
   // calculate total hours; number of weekday * hour of weekday
   let total_hrs = 0;
@@ -57,16 +57,16 @@ function calc() {
     let result = weekdays[i] * weekday_hrs[i];
     total_hrs += result;
   }
-  document.getElementById('hours').innerHTML = 'Total Hours // 总工时: ' + total_hrs;
+  document.getElementById('hours').innerHTML = `Total Hours // 总工时: ${total_hrs}`;
 
   // calculate total wages; total hours * wage
   var total_wages = total_hrs * document.getElementById('wage').value;
-  document.getElementById('wages').innerHTML = 'Total Wages // 总工资: ' + total_wages;
+  document.getElementById('wages').innerHTML = `Total Wages // 总工资: ${total_wages}`;
 }
 
 // limit hour input
 function limit(input) {
-  const warning = document.getElementById("warning");
+  const warning = document.getElementById('warning');
   if (input.value > 24 || input.value < 0) {
     warning.style.opacity = 1;
   } else {
