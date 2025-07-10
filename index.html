@@ -1,95 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Wage Calculator</title>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Wage Calculator</title>
 
-    <!-- The website stylesheet -->
-    <link rel="stylesheet" href="style.css">
+		<link rel="stylesheet" href="style.css">
+	</head>
 
+	<body>
+		<div class="title">
+			<h1>Hours per day // 每日工时（小时）</h1>
+			<div class="info_icon">
+				<i>i</i>
+				<span class="tooltip">Enter how many hours the worker works each day. Enter 0 or leave blank for day offs. <br/> 输入每日的工作时间。输入0或留空表示休息日。</span>
+			</div>
+		</div>
 
-    <!-- The website JavaScript file -->
-    <script src="script.js"></script>
-  </head>
+		<div class="week_holder">
+			<div class="day_holder">
+				<label for="monday_hr">Monday<br />周一</label>
+				<input type="number" id="monday_hr" oninput="limitHourInput(this)" />
+			</div>
+			<div class="day_holder">
+				<label for="tuesday_hr">Tuesday<br />周二</label>
+				<input type="number" id="tuesday_hr" oninput="limitHourInput(this)" />
+			</div>
+			<div class="day_holder">
+				<label for="wednesday_hr">Wednesday<br />周三</label>
+				<input type="number" id="wednesday_hr" oninput="limitHourInput(this)" />
+			</div>
+			<div class="day_holder">
+				<label for="thursday_hr">Thursday<br />周四</label>
+				<input type="number" id="thursday_hr" oninput="limitHourInput(this)" />
+			</div>
+				<div class="day_holder">
+				<label for="friday_hr">Friday<br />周五</label>
+				<input type="number" id="friday_hr" oninput="limitHourInput(this)" />
+			</div>
+				<div class="day_holder">
+				<label for="saturday_hr">Saturday<br />周六</label>
+				<input type="number" id="saturday_hr" oninput="limitHourInput(this)" />
+			</div>
+			<div class="day_holder">
+				<label for="sunday_hr">Sunday<br />周日</label>
+				<input type="number" id="sunday_hr" oninput="limitHourInput(this)" />
+			</div>
+		</div>
 
-  <body>
-    <div class="title">
-      <h1>Hours per day // 每日工时（小时）</h1>
-      <div class="info_icon">
-          <i>i</i>
-          <span class="tooltip">Enter how many hours the worker works each day. Enter 0 or leave blank for day offs. <br/> 输入每日的工作时间。输入0或留空表示休息日。</span>
-      </div>
-    </div>
-    
-    <div class="week_holder">
-      <div class="day_holder">
-        <label for="monday_hr">Monday<br />周一</label>
-        <input type="number" id="monday_hr" oninput="limitHourInput(this)" />
-      </div>
-      <div class="day_holder">
-        <label for="tuesday_hr">Tuesday<br />周二</label>
-        <input type="number" id="tuesday_hr" oninput="limitHourInput(this)" />
-      </div>
-      <div class="day_holder">
-        <label for="wednesday_hr">Wednesday<br />周三</label>
-        <input type="number" id="wednesday_hr" oninput="limitHourInput(this)" />
-      </div>
-      <div class="day_holder">
-        <label for="thursday_hr">Thursday<br />周四</label>
-        <input type="number" id="thursday_hr" oninput="limitHourInput(this)" />
-      </div>
-      <div class="day_holder">
-        <label for="friday_hr">Friday<br />周五</label>
-        <input type="number" id="friday_hr" oninput="limitHourInput(this)" />
-      </div>
-      <div class="day_holder">
-        <label for="saturday_hr">Saturday<br />周六</label>
-        <input type="number" id="saturday_hr" oninput="limitHourInput(this)" />
-      </div>
-      <div class="day_holder">
-        <label for="sunday_hr">Sunday<br />周日</label>
-        <input type="number" id="sunday_hr" oninput="limitHourInput(this)" />
-      </div>
-    </div>
-    
-    <p id="warning">Make sure all hours are entered correctly. 请确保所有时间输入正确。</p>
+		<p id="warning">Make sure all hours are entered correctly. 请确保所有时间输入正确。</p>
 
-    <div class="wage_holder">
-      <label for="wage">Hourly Wage // 时薪: $</label>
-      <input type="number" id="wage" />
-    </div>
+		<div class="wage_holder">
+			<label for="wage">Hourly Wage // 时薪: $</label>
+			<input type="number" id="wage" />
+		</div>
 
-    <div class="dates_holder">
-      <label for="begin_date">Begin Date // 开始日期: </label>
-      <input type="date" id="begin_date" /><br />
-      <label for="end_date">End Date // 结束日期: </label>
-      <input type="date" id="end_date" />
-    </div>
+		<div class="dates_holder">
+			<label for="begin_date">Begin Date // 开始日期: </label>
+			<input type="date" id="begin_date" /><br />
+			
+			<label for="end_date">End Date // 结束日期: </label>
+			<input type="date" id="end_date" />
+		</div>
 
-    <button onclick="calc()">Calculate Wages<br />计算工资</button>
+		<div class="switch_container" style="display:none">
+			<label class="switch">
+			<input type="checkbox" id="toggle_mode" onchange="toggleMode()" checked>
+			<span class="slider"></span>
+			</label>
+			<span class="switch_label">Overtime Mode // 加班模式</span>
+		</div>
 
-    <div class="result_holder">
-      <h1>Results // 结果</h1>
-      <p id="pay_period">Pay Period // 工资周期:</p>
-      <p id="hours">Total Hours // 总工时:</p>
-      <p id="wages">Total Wages // 总工资:</p>
-      <div class="title">
-        <p>Number of workdays // 工作日数</p>
-        <div class="info_icon">
-            <i>i</i>
-            <span class="tooltip">Number of workdays grouped by days of the week. <br/> 按周一至周日分组的工作日数量。</span>
-        </div>
-      </div>
-      <p id="detail">
-        Monday // 周一: <br />
-        Tuesday // 周二: <br />
-        Wednesday // 周三: <br />
-        Thursday // 周四: <br />
-        Friday // 周五: <br />
-        Saturday // 周六:<br />
-        Sunday // 周日:
-      </p>
-    </div>
-  </body>
+		<div class id="default_view">
+			<button onclick="calc()">Calculate Wages<br />计算工资</button>
+
+			<div class="result_holder">
+				<h1>Results // 结果</h1>
+				<p style="font-weight">Old Version: No overtime calculation<br/>旧版：无加班费计算</p>
+				
+				<p id="pay_period">Pay Period // 工资周期:</p>
+				<p id="hours">Total Hours // 总工时:</p>
+				<p id="wages">Total Wages // 总工资:</p>
+				
+				<div class="title">
+					<p>Number of workdays // 工作日数</p>
+					<div class="info_icon">
+					<i>i</i>
+					<span class="tooltip">Number of workdays grouped by days of the week. <br/> 按周一至周日分组的工作日数量。</span>
+					</div>
+				</div>
+				
+				<p id="detail">
+				Monday // 周一: <br />
+				Tuesday // 周二: <br />
+				Wednesday // 周三: <br />
+				Thursday // 周四: <br />
+				Friday // 周五: <br />
+				Saturday // 周六:<br />
+				Sunday // 周日:
+				</p>
+			</div>
+		</div>
+
+		<div id="overtime_view" style="display:none;">
+			<div class="overtime_holder">
+				<div class="week_start_holder">
+					<label for="week_start">First Day of Workweek // 工作周起始日:</label>
+					<select id="week_start">
+					<option value="1">Monday // 周一</option>
+					<option value="2">Tuesday // 周二</option>
+					<option value="3">Wednesday // 周三</option>
+					<option value="4">Thursday // 周四</option>
+					<option value="5">Friday // 周五</option>
+					<option value="6">Saturday // 周六</option>
+					<option value="0" selected>Sunday // 周日</option>
+					</select>
+				</div>
+				<br/>
+				
+				<label for="standard_work_week_hour">Standard Work Week // 标准工作周: </label>
+				<input type="number" id="standard_work_week_hour" value="40">
+				<label for="standard_work_week_hour">hours // 小时</label><br/>
+
+				<label for="overtime_multiplier">Overtime Multiplier // 加班乘数: </label>
+				<input type="number" id="overtime_multiplier" value="1.5">
+				<label for="overtime_multiplier">times // 倍 </label>
+				
+				
+				
+				<button onclick="calcOvertime()">Calculate Wages<br />计算工资</button>
+			</div>
+			
+			<p id="overtime_error" style="color: red; text-align: center;"></p>
+
+			<div id="overtime_result_box" class="result_box">
+				<p id="overtime_placeholder" class="placeholder">Result goes here // 结果显示在这里</p>
+			</div>
+			<button id="copy_button" onclick="copyOvertimeResult()" style="display: none; margin-top: 10px;">Copy Result // 复制结果</button>
+		</div>
+
+	</body>
+	
+	<script src="script.js"></script>
+	
 </html>
