@@ -1,5 +1,7 @@
 function getDateFromInput(id) {
-	return new Date(document.getElementById(id).value);
+	const value = document.getElementById(id).value;
+	const parts = value.split("-");
+	return new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
 }
 
 // get hours for each weekday
@@ -28,7 +30,7 @@ function countWeekdays(begin_date, end_date) {
 //format date for display
 function formatDate(date) {
 	const display = new Date(date);
-	display.setDate(display.getDate() + 1);
+	display.setDate(display.getDate());
 	return display.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 }
 
@@ -122,61 +124,28 @@ function calcOvertime() {
 	let result_text = ``;
 
 	let week_number = 1;
+
 	let current_start = new Date(begin_date);
-
-	let first_week_end = new Date(current_start);
-	while (first_week_end.getDay() !== (week_start + 6) % 7) {
-		first_week_end.setDate(first_week_end.getDate() + 1);
+	while (current_start.getDay() !== week_start) {
+		current_start.setDate(current_start.getDate() - 1);
 	}
-
-	first_week_end = new Date(Math.min(first_week_end.getTime(), end_date.getTime()));
-
-	let week_hours = 0;
-	for (let d = new Date(current_start); d <= first_week_end; d.setDate(d.getDate() + 1)) {
-		const day_index = d.getDay();
-		week_hours += weekday_hours[day_index] || 0;
-	}
-	total_hours += week_hours;
-
-	let week_pay = 0;
-	let breakdown = `Week 1 (${formatDate(current_start)} - ${formatDate(first_week_end)}): `;
-	if (week_hours > standard_work_week_hour) {
-		const base_hours = standard_work_week_hour;
-		const overtime_hours = week_hours - standard_work_week_hour;
-		const base_pay = base_hours * hourly_wage;
-		const overtime_pay = overtime_hours * hourly_wage * overtime_multiplier;
-		week_pay = base_pay + overtime_pay;
-		breakdown += `${base_hours} * $${hourly_wage} + ${overtime_hours} * $${hourly_wage} * ${overtime_multiplier} = $${week_pay.toFixed(2)}`;
-	} else {
-		week_pay = week_hours * hourly_wage;
-		breakdown += `${week_hours} hr * $${hourly_wage} = $${week_pay.toFixed(2)}`;
-	}
-	total_pay += week_pay;
-	result_text += breakdown + '\n';
-
-	week_number++;
-	current_start = new Date(first_week_end);
-	current_start.setDate(current_start.getDate() + 1);
-
 	
 	while (current_start <= end_date) {
-		let current_end = new Date(current_start);
-		current_end.setDate(current_start.getDate() + 6);
+		const current_end = new Date(current_start);
+		current_end.setDate(current_start.getDate() + 6); // one full week
 
 		const clamped_start = new Date(Math.max(current_start.getTime(), begin_date.getTime()));
 		const clamped_end = new Date(Math.min(current_end.getTime(), end_date.getTime()));
 
 		let week_hours = 0;
-
-		for (let d = new Date(clamped_start.getTime()); d <= clamped_end; d.setDate(d.getDate() + 1)) {
+		for (let d = new Date(clamped_start); d <= clamped_end; d.setDate(d.getDate() + 1)) {
 			const day_index = d.getDay();
 			week_hours += weekday_hours[day_index] || 0;
 		}
-
 		total_hours += week_hours;
 
-		let week_pay = 0;
 		let breakdown = `Week ${week_number} (${formatDate(clamped_start)} - ${formatDate(clamped_end)}): `;
+		let week_pay = 0;
 
 		if (week_hours > standard_work_week_hour) {
 			const base_hours = standard_work_week_hour;
@@ -193,9 +162,10 @@ function calcOvertime() {
 		total_pay += week_pay;
 		result_text += breakdown + '\n';
 
-		current_start.setDate(current_start.getDate() + 7);
+		current_start.setDate(current_start.getDate() + 7); // move to next week
 		week_number++;
 	}
+
 
 	result_text = `Pay Period // 工资周期: ${formatDate(begin_date)} - ${formatDate(end_date)}\n` +
 				`Total Pay // 总工资: $${total_pay.toFixed(2)}\n` + `Total Hours // 总工时: ${total_hours} hr\n\n` + result_text;
