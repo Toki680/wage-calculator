@@ -145,7 +145,7 @@ function calcOvertime() {
 		total_hours += week_hours;
 
 		let breakdown = `Week ${week_number} (${formatDate(clamped_start)} - ${formatDate(clamped_end)}): \n`;
-		breakdown += `  Hours this week: ${week_hours} hr\n`;
+		breakdown += `    Hours this week: ${week_hours} hr\n`;
 		
 		let week_pay = 0;
 
@@ -155,16 +155,16 @@ function calcOvertime() {
 			const base_pay = base_hours * hourly_wage;
 			const overtime_pay = overtime_hours * hourly_wage * overtime_multiplier;
 			week_pay = base_pay + overtime_pay;
-			breakdown += `  ${base_hours} hr × $${hourly_wage} + ${overtime_hours} hr × $${hourly_wage} × ${overtime_multiplier} = $${week_pay.toFixed(2)}\n`;
+			breakdown += `    ${base_hours} hr × $${hourly_wage} + ${overtime_hours} hr × $${hourly_wage} × ${overtime_multiplier} = $${week_pay.toFixed(2)}\n`;
 		} else {
 			week_pay = week_hours * hourly_wage;
-			breakdown += `  ${week_hours} hr × $${hourly_wage} = $${week_pay.toFixed(2)}\n`;
+			breakdown += `    ${week_hours} hr × $${hourly_wage} = $${week_pay.toFixed(2)}\n`;
 		}
 
 		total_pay += week_pay;
 		result_text += breakdown + '\n';
 
-		current_start.setDate(current_start.getDate() + 7); // move to next week
+		current_start.setDate(current_start.getDate() + 7); 
 		week_number++;
 	}
 
