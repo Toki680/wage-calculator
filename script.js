@@ -7,13 +7,13 @@ function getDateFromInput(id) {
 // get hours for each weekday
 function getWeekdayHours() {
 	return [
+		document.getElementById('sunday_hr').value,
 		document.getElementById('monday_hr').value,
 		document.getElementById('tuesday_hr').value,
 		document.getElementById('wednesday_hr').value,
 		document.getElementById('thursday_hr').value,
 		document.getElementById('friday_hr').value,
 		document.getElementById('saturday_hr').value,
-		document.getElementById('sunday_hr').value,
 	];
 }
 
