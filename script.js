@@ -130,6 +130,9 @@ function calcOvertime() {
 		current_start.setDate(current_start.getDate() - 1);
 	}
 	
+	let total_base = 0;
+	let total_overtime = 0;
+	
 	while (current_start <= end_date) {
 		const current_end = new Date(current_start);
 		current_end.setDate(current_start.getDate() + 6); // one full week
@@ -154,10 +157,13 @@ function calcOvertime() {
 			const overtime_hours = week_hours - standard_work_week_hour;
 			const base_pay = base_hours * hourly_wage;
 			const overtime_pay = overtime_hours * hourly_wage * overtime_multiplier;
+			total_base += base_hours;
+			total_overtime += overtime_hours;
 			week_pay = base_pay + overtime_pay;
-			breakdown += `    ${base_hours} hr × $${hourly_wage} + ${overtime_hours} hr × $${hourly_wage} × ${overtime_multiplier} = $${week_pay.toFixed(2)}\n`;
+			breakdown += `    ${base_hours} hr × $${hourly_wage} + <b><i>${overtime_hours} hr × $${hourly_wage} × ${overtime_multiplier}</i></b> = $${week_pay.toFixed(2)}\n`;
 		} else {
 			week_pay = week_hours * hourly_wage;
+			total_base += week_hours;
 			breakdown += `    ${week_hours} hr × $${hourly_wage} = $${week_pay.toFixed(2)}\n`;
 		}
 
@@ -169,21 +175,27 @@ function calcOvertime() {
 	}
 
 
-	result_text = `Pay Period // 工资周期: ${formatDate(begin_date)} - ${formatDate(end_date)}\n` +
-				`Total Pay // 总工资: $${total_pay.toFixed(2)}\n` + `Total Hours // 总工时: ${total_hours} hr\n\n` + result_text;
+	result_text = `Pay Period // 工资周期: ${formatDate(begin_date)} - ${formatDate(end_date)}\n\n` +
+				`Total Pay // 总工资: $${total_pay.toFixed(2)}\n` + `Total Hours // 总工时: ${total_hours} hr\n` + `Total Base Hours // 总基础工时: ${total_base} hr\n`+ `Total Overtime Hours // 总加班工时: ${total_overtime} hr\n\n` + result_text;
 	result_box.innerHTML = `<pre>${result_text}</pre>`;
 	document.getElementById('copy_button').style.display = 'block';
 	document.getElementById("overtime_result_box").innerHTML = `<pre>${result_text}</pre>`;
 }
 
 // limit hour input
-function limitHourInput(input) {
+function limitHourInput() {
 	const warning = document.getElementById('warning');
-	if (input.value > 24 || input.value < 0) {
-		warning.style.opacity = 1;
-	} else {
-		warning.style.opacity = 0;
-	}
+	const hourInputs = document.querySelectorAll('input[id$="_hr"]');
+	let showWarning = false;
+
+	hourInputs.forEach(input => {
+		const value = parseFloat(input.value);
+		if (!isNaN(value) && (value > 16 || value < 0)) {
+			showWarning = true;
+		}
+	});
+
+	warning.style.opacity = showWarning ? 1 : 0;
 }
 
 function toggleMode() {
@@ -202,10 +214,10 @@ function copyOvertimeResult() {
 
 	navigator.clipboard.writeText(result_text.textContent)
 		.then(() => {
-			alert('Result copied to clipboard! // 结果已复制');
+			alert(`Result copied to clipboard! \n结果已复制！`);
 		})
 		.catch(err => {
-			alert('Failed to copy result. // 复制失败');
+			alert(`Failed to copy result. \n复制失败。`);
 		console.error(err);
 	});
 }
