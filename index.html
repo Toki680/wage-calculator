@@ -6,6 +6,9 @@
 		<title>Wage Calculator</title>
 
 		<link rel="stylesheet" href="style.css">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 	</head>
 
 	<body>
@@ -51,15 +54,15 @@
 		<p id="warning">Make sure all hours are entered correctly. 请确保所有时间输入正确。</p>
 
 		<div class="wage_holder">
-			<label for="wage">Hourly Wage // 时薪: $</label>
+			<label for="wage">Hourly Wage // 时薪：$</label>
 			<input type="number" step="0.01" id="wage" />
 		</div>
 
 		<div class="dates_holder">
-			<label for="begin_date">Beginning Date // 开始日期: </label>
+			<label for="begin_date">Beginning Date // 开始日期：</label>
 			<input type="date" id="begin_date" /><br />
 			
-			<label for="end_date">End Date // 结束日期: </label>
+			<label for="end_date">End Date // 结束日期：</label>
 			<input type="date" id="end_date" />
 		</div>
 
@@ -104,29 +107,24 @@
 
 		<div id="overtime_view" style="display:none;">
 			<div class="overtime_holder">
-				<div class="week_start_holder">
-					<label for="week_start">First Day of Workweek // 工作周起始日:</label>
-					<select id="week_start">
-					<option value="1">Monday // 周一</option>
-					<option value="2">Tuesday // 周二</option>
-					<option value="3">Wednesday // 周三</option>
-					<option value="4">Thursday // 周四</option>
-					<option value="5">Friday // 周五</option>
-					<option value="6">Saturday // 周六</option>
-					<option value="0" selected>Sunday // 周日</option>
-					</select>
-				</div>
-				<br/>
+				<label for="week_start">First Day of Workweek // 工作周起始日：</label>
+				<select id="week_start">
+				<option value="1">Monday // 周一</option>
+				<option value="2">Tuesday // 周二</option>
+				<option value="3">Wednesday // 周三</option>
+				<option value="4">Thursday // 周四</option>
+				<option value="5">Friday // 周五</option>
+				<option value="6">Saturday // 周六</option>
+				<option value="0" selected>Sunday // 周日</option>
+				</select><br/>
 				
-				<label for="standard_work_week_hour">Standard Work Week // 标准工作周: </label>
+				<label for="standard_work_week_hour">Standard Work Week // 标准工作周：</label>
 				<input type="number" id="standard_work_week_hour" value="40">
 				<label for="standard_work_week_hour">hours // 小时</label><br/>
 
-				<label for="overtime_multiplier">Overtime Multiplier // 加班乘数: </label>
+				<label for="overtime_multiplier">Overtime Multiplier // 加班乘数：</label>
 				<input type="number" step="0.01" id="overtime_multiplier" value="1.5">
 				<label for="overtime_multiplier">times // 倍 </label>
-				
-				
 				
 				<button onclick="calcOvertime()">Calculate Wages<br />计算工资</button>
 			</div>

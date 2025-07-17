@@ -3,11 +3,14 @@
 * {
 	padding: 4px;
 	color: #2D2C2C;
+	font-family: "Roboto", sans-serif;
 }
 
 body {
 	max-width: 600px;
 	margin: auto;
+	font-weight: 500;
+	line-height: 1.5;
 }
 
 .week_holder {
@@ -19,12 +22,13 @@ body {
 	text-align: center;
 }
 
-input {
+input, select {
 	border: 1px solid #dcdfe6;
 	border-radius: 4px;
-	margin: 4px;
+	margin: 4px 0 4px 0;
 	text-align: center;
 	font-size: 16px;
+	color: #353535;
 }
 
 input::-webkit-outer-spin-button,
@@ -48,14 +52,12 @@ input::-webkit-inner-spin-button {
 button {
 	background: #3F3F3F;
 	color: white;
-	border: 1px solid #dcdfe6;
 	border-radius: 4px;
 	cursor: pointer;
 	box-sizing: border-box;
 	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	margin-top: 10px;
+	margin: 5em auto 0 auto;
+	padding: 6px 18px 6px 18px;
 }
 
 button:hover{
@@ -63,7 +65,7 @@ button:hover{
 }
 
 button:active{
-	scale: .95;
+	scale: .98;
 }
 
 .info_icon {
@@ -117,6 +119,7 @@ button:active{
 .title{
 	display: flex;
 	align-items: center;
+	justify-content: center;
 }
 
 #warning {
@@ -192,7 +195,7 @@ input:checked + .slider:before {
 
 .result_box {
 	border: 1px solid #f0f0f0;
-	line-height: 1.5;
+	line-height: 1.75;
 	padding: 15px;
 	margin-top: 20px;
 	border-radius: 8px;
@@ -207,4 +210,10 @@ input:checked + .slider:before {
 .placeholder {
 	color: #888;
 	text-align: center;
+}
+
+pre {
+	margin: 1em;
+	color: #353535;
+	font-weight: normal;
 }

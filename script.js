@@ -148,7 +148,7 @@ function calcOvertime() {
 		total_hours += week_hours;
 
 		let breakdown = `Week ${week_number} (${formatDate(clamped_start)} - ${formatDate(clamped_end)}): \n`;
-		breakdown += `    Hours this week: ${week_hours} hr\n`;
+		breakdown += `&emsp;&emsp;Hours this week: ${week_hours} hr\n`;
 		
 		let week_pay = 0;
 
@@ -160,11 +160,11 @@ function calcOvertime() {
 			total_base += base_hours;
 			total_overtime += overtime_hours;
 			week_pay = base_pay + overtime_pay;
-			breakdown += `    ${base_hours} hr × $${hourly_wage} + <b><i>${overtime_hours} hr × $${hourly_wage} × ${overtime_multiplier}</i></b> = $${week_pay.toFixed(2)}\n`;
+			breakdown += `&emsp;&emsp;${base_hours} hr × $${hourly_wage} + <b><i>${overtime_hours} hr × $${hourly_wage} × ${overtime_multiplier}</i></b> = $${week_pay.toFixed(2)}\n`;
 		} else {
 			week_pay = week_hours * hourly_wage;
 			total_base += week_hours;
-			breakdown += `    ${week_hours} hr × $${hourly_wage} = $${week_pay.toFixed(2)}\n`;
+			breakdown += `&emsp;&emsp;${week_hours} hr × $${hourly_wage} = $${week_pay.toFixed(2)}\n`;
 		}
 
 		total_pay += week_pay;
