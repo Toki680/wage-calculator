@@ -223,10 +223,10 @@ pre {
 	position: absolute;
 	left: 0;
 	top:-18px;
-	padding: 12px 8px 8px 8px;
+	padding: 12px 0px 8px 0px;
 	background: #ADE5E5;
 	text-align: center;
-	width: 100vw;
+	width: 100%;
 }
 
 a {
