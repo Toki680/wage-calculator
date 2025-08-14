@@ -222,3 +222,24 @@ function copyOvertimeResult() {
 	});
 }
 
+document.querySelectorAll('.info_icon').forEach(icon => {
+    const tooltip = icon.querySelector('.tooltip');
+
+    icon.addEventListener('mouseenter', () => {
+        tooltip.classList.remove('right'); // default left
+
+        // Try placing it on the right to check fit
+        tooltip.classList.add('right');
+        const rect = tooltip.getBoundingClientRect();
+
+        if (rect.right > window.innerWidth) {
+            // Not enough space → back to left
+            tooltip.classList.remove('right');
+        }
+    });
+
+    icon.addEventListener('mouseleave', () => {
+        // Always go back to left as default
+        tooltip.classList.remove('right');
+    });
+});

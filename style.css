@@ -17,9 +17,13 @@ body {
 .week_holder {
 	display: flex;
 	justify-content: space-between;
+	flex-wrap: wrap;
 }
 
 .day_holder {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	text-align: center;
 }
 
@@ -85,31 +89,42 @@ button:active{
 }
 
 .tooltip {
-	visibility: hidden;
-	width: 310px;
-	background-color: #555555;
-	color: #ffffff;
-	text-align: center;
-	font-size:14px;
-	border-radius: 5px;
-	padding: 5px;
-	position: absolute;
-	top: 50%;
-	left: 105%; 
-	transform: translateY(-50%);
-	opacity: 0;
-	transition: opacity 0.3s;
+    visibility: hidden;
+    width: 310px;
+    background-color: #555555;
+    color: #ffffff;
+    text-align: center;
+    font-size: 14px;
+    border-radius: 5px;
+    padding: 5px;
+    position: absolute;
+    top: 50%;
+    right: 105%;
+    transform: translateY(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
 }
 
 .tooltip::after {
-	content: "";
-	position: absolute;
-	top: 50%;
-	right: 100%; 
-	margin-top: -5px;
-	border-width: 5px;
-	border-style: solid;
-	border-color: transparent #555555 transparent transparent;
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 100%;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent transparent #555555;
+}
+
+.tooltip.right {
+    right: auto;
+    left: 105%;
+}
+
+.tooltip.right::after {
+    left: auto;
+    right: 100%;
+    border-color: transparent #555555 transparent transparent;
 }
 
 .info_icon:hover .tooltip {
@@ -202,10 +217,16 @@ input:checked + .slider:before {
 	border-radius: 8px;
 	font-size: 16px;
 	color: #2D2C2C;
-	white-space: pre;
 	max-height: 400px;
 	overflow: auto;
 	font-family: monospace;
+}
+
+.result_box pre {
+	margin: 1em;
+	margin-right: 2em;
+	white-space: pre;
+	display: inline-block;
 }
 
 .placeholder {
