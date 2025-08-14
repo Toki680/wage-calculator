@@ -9,6 +9,7 @@
 body {
 	max-width: 600px;
 	margin: auto;
+	margin-top: 40px;
 	font-weight: 500;
 	line-height: 1.5;
 }
@@ -216,4 +217,19 @@ pre {
 	margin: 1em;
 	color: #353535;
 	font-weight: normal;
+}
+
+#instruction_link {
+	position: absolute;
+	left: 0;
+	top:-18px;
+	padding: 12px 8px 8px 8px;
+	background: #ADE5E5;
+	text-align: center;
+	width: 100vw;
+}
+
+a {
+	color: #7E241F;
+	padding: 0;
 }
